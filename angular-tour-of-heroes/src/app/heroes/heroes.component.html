@@ -1,0 +1,35 @@
+<h2>My Heroes</h2>
+
+<div>
+    <label for="new-hero">Hero name: </label>
+    <!-- The # is a template variable, 'heroName' is now a variable.
+    we can refer to this variable anywhere in this template (html file = template). -->
+    <input id="new-hero" #heroName>
+
+    <!-- here we refer back to the #heroName variable above. And send it's value to the add() method in the component. -->
+    <button type="button" class="add-button" (click)="add(heroName.value); heroName.value=''">Add hero</button>
+</div>
+
+<ul class="heroes">
+    <li *ngFor="let hero of heroes">
+        <!-- Below is no longer used, but i left it in here because we did use it in the Tutorial. -->
+        <!-- (click) sends the current hero name to the component onSelect method.
+        class.selected is in the css file, and we check or the current hero is the same as the 'selectedHero',
+        if that is the same, we give it a styling. -->
+        <!-- <button type="button" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
+            <span class="badge">{{hero.id}}</span>
+            <span class="name">{{hero.name}}</span>
+        </button> -->
+
+
+        <a routerLink="/detail/{{hero.id}}">
+            <span class="badge">{{hero.id}}</span> {{hero.name}}
+        </a>
+        <button type="button" class="delete" title="delete hero" (click)="delete(hero)">x</button>
+    </li>
+</ul>
+
+
+<!-- Below is no longer used, but i left it in here because we did use it in the Tutorial.
+Send the current 'selectedHero' to the '(hero-detail.component) hero property', this is a one-way data binding. -->
+<!-- <app-hero-detail [hero]="selectedHero"></app-hero-detail> -->
